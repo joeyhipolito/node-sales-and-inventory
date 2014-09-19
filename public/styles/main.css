@@ -357,6 +357,12 @@ a, a:link, a:active, a:visited {
   box-shadow: 0 0 3px rgba(0,0,0,0.4);
 }
 
+.nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 li.nav__item {
   height: 50px;
 }
@@ -814,7 +820,9 @@ input.hidden {
   align-items: center;
 }
 
-.media__fig {}
+.media__fig {
+  margin: 0;
+}
 
 .media__icon {
   text-align: center;

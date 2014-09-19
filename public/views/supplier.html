@@ -1,0 +1,83 @@
+<header class="content__page-title pure-g">
+  <div class="media media--center page-title__block pure-u-4-5">
+    <span class="media__fig white icon--text media__icon grey ion-ios7-world"></span>
+    <h2 class="blue-grey small upper mold">Suppliers</h2>
+  </div>
+</header>
+
+<div class="content__container row">
+  <div class="content__block content__block--transparent col-4">
+    <div class="list row">
+      <div class="list__item--horizontal card__wrapper pcol-1-2" ng-repeat="supplier in suppliers">
+        <div class="list__card  list__card--padded media media--center row">
+          <div class="media__bd">
+            <a ng-href="#/supplier/{{supplier.id}}"><p class="upper media media--center">
+                <span class="media__fig media__icon detail__icon ion-ios7-world-outline blue-grey"></span>
+                <span class="bold upper  blue-grey smallest">{{supplier.name}}</span>
+              </p>
+              <p class="upper media media--center">
+                <span class="media__fig media__icon detail__icon ion-ios7-location-outline blue-grey"></span>
+                <span class="media__bd xxs blue-grey">{{supplier.address}}</span>
+              </p>
+              <p class="upper media media--center">
+                <span class="media__fig media__icon detail__icon ion-ios7-telephone-outline blue-grey"></span>
+                <span class="media__bd xxs blue-grey">{{supplier.contact_number}}</span>
+              </p></a>
+          </div>
+         <div class="card__top-button__group">
+            <a ng-href="#/purchase_order/create/verify?supplier_id={{supplier.id}}" class="card__top-button">
+             <span class="hint--left" data-hint="Purchase from this supplier"><span class="ion-bag"></span></span>
+           </a>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content__block col-3">
+    <header class="content__block__title">
+      <h5 class="bold grey--darker upper">Add a new supplier here.</h5>
+    </header>
+
+    <form ng-submit="supplierCreate()" action="" novalidate>
+      <div class="media media--center input__block input--outline grey">
+        <span class="ion-ios7-world-outline media__fig input__icon grey--darker small"></span>
+        <input class="media__bd dark grey--darker" type="text" ng-model="supplier.name" placeholder="Enter supplier/company name here">
+      </div>
+      <div class="media media--center input__block input--outline grey">
+        <span class="ion-ios7-more-outline media__fig input__icon grey--darker small"></span>
+        <input class="media__bd dark grey--darker" type="text" ng-model="supplier.tin" placeholder="Enter supplier TIN">
+      </div>
+      <div class="media media--center input__block input--outline grey">
+        <span class="ion-ios7-location-outline media__fig input__icon grey--darker small"></span>
+        <input class="media__bd dark grey--darker" type="text" ng-model="supplier.address" placeholder="Enter supplier address">
+      </div>
+      <div class="media media--center input__block input--outline grey">
+        <span class="ion-ios7-person-outline media__fig input__icon grey--darker small"></span>
+        <input class="media__bd dark grey--darker" type="text" ng-model="supplier.contact_person" placeholder="Enter name of contact person">
+      </div>
+      <div class="media media--center input__block input--outline grey">
+        <span class="ion-ios7-telephone-outline media__fig input__icon grey--darker small"></span>
+        <input class="media__bd dark grey--darker" type="text" ng-model="supplier.contact_number" placeholder="Enter supplier contact number">
+      </div>
+      <div class="media media--center input__block input--outline grey">
+        <span class="ion-ios7-email-outline media__fig input__icon grey--darker small"></span>
+        <input class="media__bd dark grey--darker" type="text" ng-model="supplier.email" placeholder="Enter supplier email address">
+      </div>
+      <a ng-click="supplierCreate()" class="media media--center button button--outline right">
+        <figure class="media__fig button__icon">
+          <span class="ion-ios7-checkmark-empty grey--darker small"></span>
+        </figure>
+        <div class="media__bd button__text grey--darker">Add Supplier</div>
+      </a>
+      <a ng-click="supplier = {}" class="media media--center button button--outline right clearfix">
+        <figure class="media__fig button__icon">
+          <span class="ion-ios7-close-empty grey--darker small"></span>
+        </figure>
+        <div class="media__bd button__text grey--darker">Reset</div>
+      </a>
+      <input class="hidden" type="submit"></input>
+    </form>
+
+  </div>
+</div>
+
