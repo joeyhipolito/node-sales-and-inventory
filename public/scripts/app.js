@@ -35,12 +35,7 @@ angular
       })
       .state('dashboard.admin', {
         url: '/admin',
-        templateUrl: 'views/admin.html',
-        resolve: {
-          logs: function (Log) {
-            return Log.query();
-          }
-        }
+        templateUrl: 'views/admin.html'
       });
 
     $stateProvider

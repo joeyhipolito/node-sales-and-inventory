@@ -20,6 +20,14 @@ module.exports = function (app, passport) {
   app.put('/purchase-order/:id', po.update);
   app.delete('/purchase-order/:id', po.delete);
 
+  // supplier
+  var supplier = require('../controllers/supplier');
+  app.get('/supplier', supplier.query);
+  app.post('/supplier', supplier.create);
+  app.get('/supplier/:id', supplier.get);
+  app.put('/supplier/:id', supplier.update);
+  app.delete('/supplier/:id', supplier.delete);
+
 }
 
 function isAuthenticated (req, res, next) {
