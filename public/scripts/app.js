@@ -78,5 +78,52 @@ angular
         templateUrl: 'views/supplier.detail.html'
       });
 
+    $stateProvider
+      .state('supply', {
+        abstract: true,
+        templateUrl: 'views/templates/left-sidebar.html'
+      })
+      .state('supply.control', {
+        url: '/supply',
+        templateUrl: 'views/supply.html'
+      });
+
+    $stateProvider
+      .state('order', {
+        abstract: true,
+        templateUrl: 'views/templates/left-sidebar.html'
+      })
+      .state('order.control', {
+        url: '/order',
+        templateUrl: 'views/order.html'
+      })
+      .state('order.receive', {
+        url: '/order/receive',
+        templateUrl: 'views/order.receive.html'
+      });
+
+    $stateProvider
+      .state('product', {
+        abstract: true,
+        templateUrl: 'views/templates/left-sidebar.html'
+      })
+      .state('product.control', {
+        url: '/product',
+        templateUrl: 'views/product.html'
+      });
+
+    $stateProvider
+      .state('user', {
+        abstract: true,
+        templateUrl: 'views/templates/left-sidebar.html'
+      })
+      .state('user.control', {
+        url: '/user',
+        templateUrl: 'views/user.html'
+      })
+      .state('user.detail', {
+        url: '/user/:id',
+        templateUrl: 'views/user.detail.html'
+      });
 
   });

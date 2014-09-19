@@ -1,0 +1,58 @@
+<header class="content__page-title pure-g">
+  <div class="media media--center page-title__block pure-u-4-5">
+    <span class="media__fig white icon--text media__icon grey ion-android-storage"></span>
+    <h2 class="blue-grey small upper mold">Supplies</h2>
+  </div>
+</header>
+
+<div class="content__container row empty-box__wrapper">
+  <div ng-hide="supplies.length > 0" class="empty-box">
+    <div class="empty-box__image">
+      <span class="ion-ios7-information-outline grey"></span>
+    </div>
+    <div class="empty-box__text">
+      <h1 class="grey bold upper">Supplies weren't added here, yet.</h1>
+      <h2 class="grey bold">
+        Click <a href="#/supply/create" class="button blue button--round">here</a> to add supplies from your inventory.
+      </h2>
+    </div>
+  </div>
+
+  <!-- start order items -->
+  <div class="list row">
+    <div class="list__item--horizontal card__wrapper pcol-1-3" ng-repeat="supply in supplies | filter:search">
+      <div class="list__card  list__card--padded">
+        <p class="media media--center">
+          <span class="media__fig media__icon detail__icon ion-cube grey"></span>
+          <span class="blue-grey">Brand Name: <span class="bold upper">{{supply.brand_name}}</span></span>
+        </p>
+        <p class="media media--center">
+          <span class="media__fig media__icon detail__icon ion-more grey"></span>
+          <span class="blue-grey">Generic Name: <span class="bold upper">{{supply.generic_name}}</span></span>
+        </p>
+        <p class="media media--center" ng-show="supply.expiration">
+          <span class="media__fig media__icon detail__icon ion-ios7-calendar-outline grey"></span>
+          <span class="blue-grey">Expiration Date: <span class="bold upper">{{supply.expiration}}</span></span>
+        </p>
+        <p class="media media--center" ng-show="supply.retail_price">
+          <span class="media__fig media__icon detail__icon ion-ios7-pricetags-outline grey"></span>
+          <span class="blue-grey">Retail Price: <span class="bold upper">PhP {{supply.retail_price || 0 | number: 2}}</span></span>
+        </p>
+        <p class="media media--center">
+          <span class="media__fig media__icon detail__icon smallest ion-pound grey"></span>
+          <span class="blue-grey">Remaining Quantity:
+            <span class="bold upper">{{supply.amount_remaining || 0}} <ng-pluralize count="supply.amount_remaining" when="{'null': 'units', '1' : 'unit', 'other' : 'units'}"></span></ng-pluralize>
+           </span>
+        </p>
+        <p class="media media--center">
+          <span class="media__fig media__icon detail__icon smallest ion-pound grey"></span>
+          <span class="blue-grey">Original Quantity:
+            <span class="bold upper">{{supply.amount_original || 0}} <ng-pluralize count="supply.amount_original" when="{'null': 'units', '1' : 'unit', 'other' : 'units'}"></span></ng-pluralize>
+           </span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- end order items -->
+
+</div>
