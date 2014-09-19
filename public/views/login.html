@@ -1,0 +1,19 @@
+<form ng-submit="login()" action="" novalidate>
+  <div class="media media--center input__block input--outline white">
+    <span class="media__fig input__icon small white ion-ios7-person-outline"></span>
+    <input class="media__bd" type="text" ng-model="user.username" placeholder="Enter username here">
+  </div>
+  <div class="media media--center input__block input--outline white">
+    <span class="media__fig input__icon small white ion-ios7-locked-outline"></span>
+    <input class="media__bd" type="password" ng-model="user.password" placeholder="Enter password here">
+  </div>
+  <a ng-click="login()" class="media media--center button button--outline right white" type="submit">
+    <span class="media__fig button__icon  white small ion-ios7-checkmark-empty"></span>
+    <div class="media__bd button__text white">Login</div>
+  </a>
+  <a ui-sref="home.splash" class="media media--center button button--outline right clearfix white">
+    <span class="media__fig button__icon small white ion-ios7-close-empty"></span>
+    <div class="media__bd button__text white">Cancel</div>
+  </a>
+  <input class="hidden" type="submit"></input>
+</form>
