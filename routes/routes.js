@@ -11,6 +11,15 @@ module.exports = function (app, passport) {
   app.post('/auth', passport.authenticate('login'), auth.login);
   app.delete('/auth', auth.logout);
 
+  // purchase order
+
+  var po = require('../controllers/purchase-order');
+  app.post('/purchase-order', po.create);
+  app.get('/purchase-order', po.query);
+  app.get('/purchase-order/:id', po.get);
+  app.put('/purchase-order/:id', po.update);
+  app.delete('/purchase-order/:id', po.delete);
+
 }
 
 function isAuthenticated (req, res, next) {

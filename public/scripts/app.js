@@ -24,7 +24,8 @@ angular
       })
       .state('home.auth', {
         url: '/login',
-        templateUrl: '/views/login.html'
+        templateUrl: '/views/login.html',
+        controller: 'AuthCtrl'
       });
 
     $stateProvider
@@ -34,13 +35,24 @@ angular
       })
       .state('dashboard.admin', {
         url: '/admin',
-        templateUrl: 'views/admin.html'
-      })
+        templateUrl: 'views/admin.html',
+        resolve: {
+          logs: function (Log) {
+            return Log.query();
+          }
+        }
+      });
 
     $stateProvider
       .state('purchase_order', {
         abstract: true,
-        templateUrl: 'views/templates/left-sidebar.html'
+        templateUrl: 'views/templates/left-sidebar.html',
+        resolve: {
+          purchaseOrders: function(PurchaseOrder) {
+            return PurchaseOrder.query();
+          }
+        },
+        controller: 'PurchaseOrderCtrl'
       })
       .state('purchase_order.view', {
         url: '/purchase_order',
