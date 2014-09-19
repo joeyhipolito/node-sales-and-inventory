@@ -1,0 +1,70 @@
+<header class="content__page-title">
+  <div class="media media--center page-title__block left">
+    <span class="media__fig white icon--text media__icon grey ion-filing"></span>
+    <h2 class="blue-grey small upper mold">Orders</h2>
+  </div>
+  <div class="media media--center input__block input--outline grey right">
+    <span class="ion-ios7-search media__fig input__icon small grey--darker"></span>
+    <input class="media__bd dark" type="text" ng-model="search.product_name" placeholder="Search for order item">
+  </div>
+</header>
+<div class="content__container row empty-box__wrapper">
+  <!-- start order items -->
+  <div class="list row">
+    <div class="list__item--horizontal card__wrapper pcol-1-3" ng-repeat="order in orders | filter:search">
+      <div class="list__card  list__card--padded">
+        <div class="card__top-button__group">
+          <a href="" class="card__top-button">
+            <span class="hint--left" data-hint="{{order.status}}">
+              <span class="small" ng-class="{incomplete : 'ion-ios7-information red', pending : 'green ion-ios7-information', complete : 'blue ion-checkmark-circled', draft : 'ion-ios7-information grey'}[order.status]"></span>
+            </span>
+          </a>
+        </div>
+        <div class="clearfix"></div>
+        <p class="media media--center">
+          <span class="media__fig media__icon detail__icon ion-cube grey"></span>
+          <span class="blue-grey">Product Name: <span class="bold upper">{{order.product_name}}</span></span>
+        </p>
+        <p class="media media--center" ng-show="order.expiration">
+          <span class="media__fig media__icon detail__icon ion-ios7-calendar-outline grey"></span>
+          <span class="blue-grey">Expiration Date: <span class="bold upper">{{order.expiration}}</span></span>
+        </p>
+        <p class="media media--center" ng-show="order.unit_cost">
+          <span class="media__fig media__icon detail__icon ion-ios7-pricetags-outline grey"></span>
+          <span class="blue-grey">Unit Cost: <span class="bold upper">PhP {{order.unit_cost || 0 | number: 2}}</span></span>
+        </p>
+        <p class="media media--center">
+          <span class="media__fig media__icon detail__icon smallest ion-pound grey"></span>
+          <span class="blue-grey">Quantity Ordered:
+            <span class="bold upper">{{order.quantity_ordered || 0}} <ng-pluralize count="order.quantity_ordered" when="{'null': 'units', '1' : 'unit', 'other' : 'units'}"></span></ng-pluralize>
+           </span>
+        </p>
+        <p class="media media--center">
+          <span class="media__fig media__icon detail__icon ion-ios7-download grey"></span>
+          <span class="blue-grey">Quantity Received: <span class="bold upper">{{order.quantity_received || 0}} <ng-pluralize count="order.quantity_received" when="{'null': 'units', '1' : 'unit', 'other' : 'units'}"></span> </ng-pluralize>
+           </span>
+        </p>
+        <div class="spacer"></div>
+        <div ng-show="order.status === 'complete'">
+          <a ng-click="orderAddToSupply($index)" class="media media--center button button--outline blue right">
+            <span class="media__fig button__icon small ion-android-storage"></span>
+            <div class="media__bd button__text">Add to Supplies</div>
+          </a>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end order items -->
+  <div ng-hide="orders.length > 0" class="empty-box">
+    <div class="empty-box__image">
+      <span class="ion-ios7-information-outline grey"></span>
+    </div>
+    <div class="empty-box__text">
+      <h1 class="grey bold upper">No Orders has been added, yet.</h1>
+      <h2 class="grey bold">
+        Click <a href="#/purchase_order/create" class="button blue button--round">here</a> to issue purchase orders.
+      </h2>
+    </div>
+  </div>
+</div>

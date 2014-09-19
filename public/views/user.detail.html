@@ -1,0 +1,69 @@
+<header class="content__page-title pure-g">
+  <div class="media media--center page-title__block pure-u-4-5">
+    <span class="media__fig white icon--text media__icon grey ion-ios7-person"></span>
+    <h2 class="blue-grey small upper mold">{{user.firstname}} {{user.lastname}}</h2>
+  </div>
+</header>
+
+<div class="content__container">
+  <div class="profile list__card list__item--horizontal pcol-1-2">
+    <div class="profile__header">
+      <span class="ion-ios7-person profile__header__img"></span>
+    </div>
+    <div class="profile__body">
+      <p class="upper media media--center">
+        <span class="media__fig media__icon detail__icon ion-ios7-person blue-grey small"></span>
+        <span>Name : </span>
+        <span class="bold upper  blue-grey">{{user.firstname}} {{user.lastname}}</span>
+      </p>
+      <p class="upper media media--center">
+        <span class="media__fig media__icon detail__icon ion-bookmark blue-grey  small"></span>
+        <span>Role : </span>
+        <span class="tag upper bold"
+      ng-class="{administrator : 'red', warehouseman : 'blue', manager : 'violet', cashier : 'grey'}[user.role]"
+      >{{user.role}}</span>
+      </p>
+      <div class="spacer"></div>
+      <form ng-submit="userUpdate()" action="" novalidate ng-show="toUpdate">
+        <div class="media media--center input__block input--outline grey">
+          <span class="ion-ios7-more-outline media__fig input__icon small grey--darker"></span>
+          <input class="media__bd dark grey--darker" type="text" ng-model="user.firstname" placeholder="Enter first name here">
+        </div>
+        <div class="media media--center input__block input--outline grey">
+          <span class="ion-ios7-more-outline media__fig input__icon small grey--darker"></span>
+          <input class="media__bd dark grey--darker" type="text" ng-model="user.lastname" placeholder="Enter last name here">
+        </div>
+        <div class="media media--center input__block input--outline grey">
+          <span class="ion-ios7-toggle-outline media__fig input__icon small grey--darker"></span>
+          <select class="media__bd dark grey--darker" ng-model="user.role" 
+              ng-init="user.role = user.role || selectOptions[0].value"
+              ng-options="option.value as option.name for option in selectOptions"
+              options-disabled="option.isdefault for option in selectOptions">
+          </select>
+        </div>
+        <a ng-click="userUpdate()" class="media media--center button button--outline right">
+          <figure class="media__fig button__icon small">
+            <span class="ion-ios7-checkmark-empty grey--darker"></span>
+          </figure>
+          <div class="media__bd button__text grey--darker">Save</div>
+        </a>
+        <input class="hidden" type="submit"></input>
+        <div class="clearfix"></div>
+      </form>
+
+    </div>
+
+    <div class="card__top-button__group">
+      <a ng-hide="toUpdate" href="" class="card__top-button" ng-click="toggleToUpdate()">
+        <span class="hint--left" data-hint="Edit this user"><span class="ion-ios7-compose-outline small white"></span></span>
+      </a>
+      <a ng-show="toUpdate" href="" class="card__top-button" ng-click="cancelUpdate()">
+        <span class="hint--left" data-hint="Cancel"><span class="ion-close small white"></span></span>
+      </a>
+      <a ng-show="toUpdate" href="" class="card__top-button" ng-click="userDelete()">
+        <span class="hint--left" data-hint="Delete this user."><span class="ion-ios7-trash-outline small red"></span></span>
+      </a>
+    </div>
+  </div>
+</div>
+

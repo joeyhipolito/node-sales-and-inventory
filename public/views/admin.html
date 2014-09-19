@@ -1,0 +1,53 @@
+<header class="content__page-title">
+  <div class="media media--center page-title__block left">
+    <span class="media__fig white icon--text media__icon grey ion-levels"></span>
+    <h2 class="blue-grey small upper mold">Admin Panel</h2>
+  </div>
+  <div class="right">
+    <a ng-href="#/purchase_order/create" class="button blue-grey--dark media media--center smallest right">
+      <span class="ion-plus media__icon button__icon white media__fig"></span>
+      <span class="upper bold white media__bd">Create Purchase Order</span>
+    </a>
+  </div>
+</header>
+<div class="content__container row">
+  <div class="content__block col-1">
+    <h5 class="content__block__title bold grey--darker upper">System Access Logs</h5>
+    <ul class="list">
+      <li ng-repeat="user in log.user" class="list__item list__item--bordered media media--center ng-scope">
+        <span class="media__fig ion-ios7-person media__icon user__img white"></span>
+        <div class="media__bd user__block upper smallest">
+          <p class="bold">{{user.firstname}} {{user.lastname}}</p>
+          <p class="grey--dark">{{user.role}}</p>
+          <p class="grey--dark">{{user.time_in | dateToISO | date : 'MMM d, y h:mm a'}}</p>
+        </div>
+      </li>    
+    </ul>
+  </div>
+  <div class="content__block col-3">
+    <h5 class="content__block__title bold grey--darker upper">Logs of most recent purchase orders</h5>
+    
+    <table class="pure-table pure-table-horizontal smallest upper">
+      <thead>
+        <tr>
+          <th>-</th>
+          <th>status</th>
+          <th>tracking id</th>
+          <th>supplier</th>
+          <th>date last updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="log in log.purchase">
+          <td><span class="ion-ios7-pricetags small grey--light" ng-class="{draft : 'grey', pending : 'green', complete : 'blue', incomplete : 'red'}[log.status]"></span></td>
+          <td>{{log.status}}</td>
+          <td>{{log.tracking_id}}</td>
+          <td>{{log.supplier}}</td>
+          <td>{{log.date_last_updated || 'not yet updated'}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>

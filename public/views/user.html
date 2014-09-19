@@ -1,0 +1,80 @@
+<header class="content__page-title pure-g">
+  <div class="media media--center page-title__block pure-u-4-5">
+    <span class="media__fig white icon--text media__icon grey ion-ios7-people"></span>
+    <h2 class="blue-grey small upper mold">Users</h2>
+  </div>
+</header>
+
+<div class="content__container row">
+  <div ui-view="list" class="content__block content__block--transparent col-4">
+    <ul class="list">
+      <li ng-repeat="user in users" class="list__card list__card--padded media media--center card row">
+        <div class="media media--center card__item--horizontal col-1">
+          <span class="media__fig ion-ios7-person media__icon user__img white"></span>
+          <div class="media__bd upper smallest">
+            <p class="bold">{{user.firstname}} {{user.lastname}}</p>
+          </div>
+        </div>
+        <div class="col-1 card__item--horizontal">
+          <span class="tag upper smallest bold"
+          ng-class="{administrator : 'red', warehouseman : 'blue', manager : 'violet', cashier : 'grey'}[user.role]"
+          >{{user.role}}</span>
+        </div>
+        <div class="col-1 card__item--horizontal">
+          <p class="upper thin xxs">username</p>
+          <p class="bold smallest">{{user.username}}</p>
+        </div>
+        <a ng-href="#/user/{{user.id}}" class="media media--center smallest icon__group--links card__item--horizontal">
+          <span class="ion-ios7-gear media__icon button__icon small"></span>
+          <span class="upper bold">View</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="content__block col-3">
+    <header class="content__block__title">
+      <h5 class="bold grey--darker upper">Add a new user.</h5>
+    </header>
+
+    <form ng-submit="userCreate()" action="" novalidate>
+      <div class="media media--center input__block input--outline grey">
+        <span class="ion-ios7-person-outline media__fig input__icon small grey--darker"></span>
+        <input class="media__bd dark grey--darker" type="text" ng-model="user.username" placeholder="Enter desired username here">
+      </div>
+      <div class="media media--center input__block input--outline grey">
+        <span class="ion-ios7-more-outline media__fig input__icon small grey--darker"></span>
+        <input class="media__bd dark grey--darker" type="text" ng-model="user.firstname" placeholder="Enter first name here">
+      </div>
+      <div class="media media--center input__block input--outline grey">
+        <span class="ion-ios7-more-outline media__fig input__icon small grey--darker"></span>
+        <input class="media__bd dark grey--darker" type="text" ng-model="user.lastname" placeholder="Enter last name here">
+      </div>
+      <div class="media media--center input__block input--outline grey">
+        <span class="ion-ios7-locked-outline media__fig input__icon small grey--darker"></span>
+        <input class="media__bd dark grey--darker" type="text" ng-model="user.contact_number" placeholder="Enter desired password">
+      </div>
+      <div class="media media--center input__block input--outline grey">
+        <span class="ion-ios7-toggle-outline media__fig input__icon small grey--darker"></span>
+        <select class="media__bd dark grey--darker" ng-model="user.role" 
+            ng-init="user.role = user.role || selectOptions[0].value"
+            ng-options="option.value as option.name for option in selectOptions"
+            options-disabled="option.isdefault for option in selectOptions">
+        </select>
+      </div>
+      <a ng-click="userCreate()" class="media media--center button button--outline right">
+        <figure class="media__fig button__icon small">
+          <span class="ion-ios7-checkmark-empty grey--darker"></span>
+        </figure>
+        <div class="media__bd button__text grey--darker">Save</div>
+      </a>
+      <a ng-click="user = {}" class="media media--center button button--outline right clearfix">
+        <figure class="media__fig button__icon small">
+          <span class="ion-ios7-close-empty grey--darker"></span>
+        </figure>
+        <div class="media__bd button__text grey--darker">Reset</div>
+      </a>
+      <input class="hidden" type="submit"></input>
+    </form>
+
+  </div>
+</div>

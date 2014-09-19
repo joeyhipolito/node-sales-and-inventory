@@ -1,6 +1,9 @@
 module.exports = function (app, passport) {
 
   // home
+  app.get('/', function (req, res) {
+    res.render('index');
+  });
 
   // authentication
   var auth = require('../controllers/auth');
