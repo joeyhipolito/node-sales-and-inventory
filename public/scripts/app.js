@@ -41,13 +41,13 @@ angular
     $stateProvider
       .state('purchase_order', {
         abstract: true,
-        templateUrl: 'views/templates/left-sidebar.html',
-        resolve: {
-          purchaseOrders: function(PurchaseOrder) {
-            return PurchaseOrder.query();
-          }
-        },
-        controller: 'PurchaseOrderCtrl'
+        templateUrl: 'views/templates/left-sidebar.html'
+        // resolve: {
+        //   purchaseOrders: function(PurchaseOrder) {
+        //     return PurchaseOrder.query();
+        //   }
+        // },
+        // controller: 'PurchaseOrderCtrl'
       })
       .state('purchase_order.view', {
         url: '/purchase_order',
@@ -56,19 +56,19 @@ angular
       .state('purchase_order.create', {
         abstract: true,
         url: '/purchase_order/create?supplier_id',
-        templateUrl: 'purchase_order.create.html'
+        templateUrl: 'views/purchase_order.create.html'
       })
       .state('purchase_order.create.suppliers_list', {
         url: '',
-        templateUrl: 'purchase_order.create.suppliers_list.html'
+        templateUrl: 'views/purchase_order.create.suppliers_list.html'
       })
       .state('purchase_order.create.verify', {
         url: '/verify_supplier',
-        templateUrl: 'purchase_order.create.verify_supplier.html'
+        templateUrl: 'views/purchase_order.create.verify_supplier.html'
       })
       .state('purchase_order.create.order', {
         url: '/issue_order',
-        templateUrl: 'purchase_order.create.issue_order.html'
+        templateUrl: 'views/purchase_order.create.issue_order.html'
       });
 
     $stateProvider
@@ -78,11 +78,24 @@ angular
       })
       .state('supplier.list', {
         url: '/supplier',
-        templateUrl: 'views/supplier.html'
+        templateUrl: 'views/supplier.html',
+        resolve: {
+          suppliers: function (Supplier) {
+            return Supplier.query().$promise;
+          }
+        },
+        controller: 'SupplierCtrl'
       })
       .state('supplier.detail', {
         url: '/supplier/:id',
-        templateUrl: 'views/supplier.detail.html'
+        templateUrl: 'views/supplier.detail.html',
+        resolve: {
+          supplier: function ($stateParams, Supplier) {
+            var id = $stateParams.id;
+            return Supplier.get({id: id}).$promise;
+          }
+        },
+        controller: 'SupplierDetailCtrl'
       });
 
     $stateProvider

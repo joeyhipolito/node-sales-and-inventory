@@ -1,0 +1,24 @@
+<header class="content__block__title">
+  <h5 class="bold grey--darker upper">Select a supplier that you would like to purchase to.</h5>
+</header>
+<div class="list row">
+  <div class="list__item--horizontal card__wrapper pcol-1-3" ng-repeat="supplier in suppliers">
+    <div class="list__card  list__card--padded media media--center row" ng-class="{'supplier--selected' : $parent.supplier.id == supplier.id}">
+      <div class="media__bd">
+        <a ng-href="" ng-click="setSupplier(supplier)" ui-sref="purchaseOrder.create.verify">
+          <p class="upper media media--center">
+            <span class="media__fig media__icon detail__icon ion-ios7-world-outline blue-grey"></span>
+            <span class="bold upper  blue-grey smallest">{{supplier.name}}</span>
+          </p>
+          <p class="upper media media--center">
+            <span class="media__fig media__icon detail__icon ion-ios7-location-outline blue-grey"></span>
+            <span class="media__bd xxs blue-grey">{{supplier.address}}</span>
+          </p>
+          <p class="upper media media--center">
+            <span class="media__fig media__icon detail__icon ion-ios7-telephone-outline blue-grey"></span>
+            <span class="media__bd xxs blue-grey">{{supplier.contact_number}}</span>
+          </p></a>
+      </div>
+    </div>
+  </div>
+</div>

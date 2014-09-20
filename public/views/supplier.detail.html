@@ -11,33 +11,35 @@
       <span class="ion-ios7-world profile__header__img"></span>
     </div>
     <div class="profile__body">
-      <p class="upper media media--center">
-        <span class="media__fig media__icon detail__icon ion-ios7-world blue-grey small"></span>
-        <span class="bold upper  blue-grey">{{supplier.name}}</span>
-      </p>
-      <p class="upper media media--center">
-        <span class="media__fig media__icon detail__icon  blue-grey smallest upper">tin</span>
-        <span class="bold upper blue-grey">{{supplier.tin}}</span>
-      </p>
-      <p class="upper media media--center">
-        <span class="media__fig media__icon detail__icon ion-ios7-location blue-grey small"></span>
-        <span class="bold upper blue-grey">{{supplier.address}}</span>
-      </p>
-      <p class="upper media media--center">
-        <span class="media__fig media__icon detail__icon ion-ios7-person blue-grey small"></span>
-        <span class="bold upper blue-grey">{{supplier.contact_person}}</span>
-      </p>
-      <p class="upper media media--center">
-        <span class="media__fig media__icon detail__icon ion-ios7-telephone blue-grey small"></span>
-        <span class="bold upper blue-grey">{{supplier.contact_number}}</span>
-      </p>
-      <p class="upper media media--center">
-        <span class="media__fig media__icon detail__icon ion-ios7-email blue-grey small"></span>
-        <span class="bold upper blue-grey">{{supplier.email}}</span>
-      </p>
+      <div ng-hide="toUpdate">
+        <p class="upper media media--center">
+          <span class="media__fig media__icon detail__icon ion-ios7-world blue-grey small"></span>
+          <span class="bold upper  blue-grey">{{supplier.name}}</span>
+        </p>
+        <p class="upper media media--center">
+          <span class="media__fig media__icon detail__icon  blue-grey smallest upper">tin</span>
+          <span class="bold upper blue-grey">{{supplier.tin}}</span>
+        </p>
+        <p class="upper media media--center">
+          <span class="media__fig media__icon detail__icon ion-ios7-location blue-grey small"></span>
+          <span class="bold upper blue-grey">{{supplier.address}}</span>
+        </p>
+        <p class="upper media media--center">
+          <span class="media__fig media__icon detail__icon ion-ios7-person blue-grey small"></span>
+          <span class="bold upper blue-grey">{{supplier.contact_person}}</span>
+        </p>
+        <p class="upper media media--center">
+          <span class="media__fig media__icon detail__icon ion-ios7-telephone blue-grey small"></span>
+          <span class="bold upper blue-grey">{{supplier.contact_number}}</span>
+        </p>
+        <p class="upper media media--center">
+          <span class="media__fig media__icon detail__icon ion-ios7-email blue-grey small"></span>
+          <span class="bold upper blue-grey">{{supplier.email}}</span>
+        </p>
+      </div>
 
       <div class="spacer"></div>
-      <form ng-submit="supplierUpdate()" action="" novalidate  ng-show="toUpdate">
+      <form ng-submit="update()" action="" novalidate  ng-show="toUpdate">
         <div class="media media--center input__block input--outline grey">
           <span class="ion-ios7-world-outline media__fig input__icon grey--darker small"></span>
           <input class="media__bd dark grey--darker" type="text" ng-model="supplier.name" placeholder="Enter supplier/company name here">
@@ -62,7 +64,7 @@
           <span class="ion-ios7-email-outline media__fig input__icon grey--darker small"></span>
           <input class="media__bd dark grey--darker" type="text" ng-model="supplier.email" placeholder="Enter supplier email address">
         </div>
-        <a ng-click="supplierUpdate()" class="media media--center button button--outline right">
+        <a ng-click="update()" class="media media--center button button--outline right">
           <figure class="media__fig button__icon">
             <span class="ion-ios7-checkmark-empty grey--darker small"></span>
           </figure>
@@ -76,10 +78,10 @@
     </div>
 
     <div class="card__top-button__group">
-      <a ng-hide="toUpdate" href="" class="card__top-button" ng-click="toggleToUpdate()">
+      <a ng-hide="toUpdate" href="" class="card__top-button" ng-click="toggle()">
         <span class="hint--left" data-hint="Edit this supplier"><span class="ion-ios7-compose-outline small white"></span></span>
       </a>
-      <a ng-show="toUpdate" href="" class="card__top-button" ng-click="cancelUpdate()">
+      <a ng-show="toUpdate" href="" class="card__top-button" ng-click="cancel()">
         <span class="hint--left" data-hint="Cancel"><span class="ion-close small white"></span></span>
       </a>
       <!-- <a ng-show="toUpdate" href="" class="card__top-button" ng-click="userDelete()">

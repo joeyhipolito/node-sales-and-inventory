@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="content__block--noborder col-1">
+    <header class="content__block__title">
+      <h5 class="bold grey--darker upper">What items would you like to order?</h5>
+    </header>
+    
+    <form ng-submit="orderCreate()" action="" novalidate>
+      <div class="media media--center input__block input--outline grey">
+        <span class="ion-ios7-cart-outline media__fig input__icon small grey--darker"></span>
+        <input class="media__bd dark grey--darker" type="text" ng-model="order.product_name" placeholder="Enter product name here">
+      </div>
+      <div class="media media--center input__block input--outline grey">
+        <span class="ion-ios7-more-outline media__fig input__icon small grey--darker"></span>
+        <input class="media__bd dark grey--darker" type="number" ng-model="order.quantity_ordered" placeholder="Enter amount">
+      </div>
+      <a ng-click="orderCreate()" class="media media--center button button--outline right">
+        <figure class="media__fig button__icon small">
+          <span class="ion-ios7-checkmark-empty grey--darker"></span>
+        </figure>
+        <div class="media__bd button__text grey--darker">Order</div>
+      </a>
+      <input class="hidden" type="submit"></input>
+    </form>
+  </div>
+  
+  <div class="content__block--noborder col-2">
+    <div ng-show="orders.length > 0">
+      <header class="content__block__title">
+        <h5 class="bold grey--darker upper">Items currently in purchase order</h5>
+      </header>
+      <ul class="order__list">
+        <li class="order__item tag white media media--center" ng-repeat="order in orders">
+          <span class="media__fig ion-cube detail__icon grey"></span>
+          <span class="smallest upper">&nbsp;{{order.product_name}} ({{order.quantity_ordered}})</span>
+          <a href="" ng-click="orderDelete($index)">
+            <span class="hint--top" data-hint="Delete this product"><span class="media__fig ion-close detail__icon red"></span></span>
+          </a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+      <a class="button green media media--center right" ng-click="purchaseOrderIssue()">
+        <span class="ion-ios7-checkmark-empty media__icon button__icon small white"></span>
+        <span class="media__bd upper bold white smallest">Issue Purchase Order</span>
+      </a>
+    </div>
+  </div>
+</div>

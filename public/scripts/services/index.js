@@ -1,4 +1,4 @@
-angular.module('whimApp')
+angular.module('bensethApp')
   .factory('Resource', function ($resource) {
     // http://kirkbushell.me/angular-js-using-ng-resource-in-a-more-restful-manner/
     return function (url, params, methods) {
@@ -12,10 +12,10 @@ angular.module('whimApp')
       var resource = $resource(url, params, methods);
 
       resource.prototype.$save = function() {
-        if (!this.id) {
+        if (!this._id) {
           return this.$create();
         } else {
-          return this.$update();
+          return this.$update({id: this._id});
         }
       };
 

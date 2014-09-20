@@ -1,0 +1,30 @@
+<header class="content__block__title">
+  <h5 class="bold grey--darker upper">Verify action</h5>
+</header>
+<div ng-hide="!isEmpty(purchaseOrder)">
+  <p class="validation-message warning xxs bold">Please select a supplier.</p>
+</div>
+<div ng-show="!isEmpty(purchaseOrder)">
+  <p class="validation-message info bold">Are you sure you want to issue a purchase order to:</p>
+  <div class="list__card  list__card--padded media media--center  pcol-1-2">
+    <div class="media__bd">
+      <p class="upper media media--center">
+        <span class="media__fig media__icon detail__icon ion-ios7-world-outline blue-grey"></span>
+        <span class="bold upper  blue-grey smallest">{{supplier.name}}</span>
+      </p>
+      <p class="upper media media--center">
+        <span class="media__fig media__icon detail__icon ion-ios7-location-outline blue-grey"></span>
+        <span class="media__bd xxs blue-grey">{{supplier.address}}</span>
+      </p>
+      <p class="upper media media--center">
+        <span class="media__fig media__icon detail__icon ion-ios7-telephone-outline blue-grey"></span>
+        <span class="media__bd xxs blue-grey">{{supplier.contact_number}}</span>
+      </p>
+    </div>
+  </div>
+  
+  <a  ui-sref="purchaseOrder.create.order" class="button green media media--center right" ng-click="purchaseOrderCreate()">
+    <span class="ion-ios7-checkmark-empty media__icon button__icon small white"></span>
+    <span class="media__bd upper bold white smallest">Create Purchase Order</span>
+  </a>
+</div>

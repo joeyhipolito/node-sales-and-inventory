@@ -15,6 +15,40 @@ angular.module('bensethApp')
     };
     
   })
+  .controller('SupplierCtrl', function ($scope, suppliers, Supplier) {
+
+    $scope.suppliers = suppliers;
+
+    $scope.create = function () {
+      Supplier.save({}, $scope.supplier).$promise.then(function (supplier) {
+        $scope.suppliers.splice(0, 0, supplier);
+        $scope.supplier = {};
+      });
+    };
+
+  })
+  .controller('SupplierDetailCtrl', function ($scope, supplier) {
+
+    var temp = null;
+    $scope.supplier = supplier;
+
+
+    $scope.update = function () {
+      $scope.supplier.$save();
+      $scope.toggle();
+    };
+
+    $scope.cancel = function() {
+      $scope.supplier = angular.copy(temp);
+      $scope.toggle();
+    };
+
+    $scope.toggle = function() {
+      temp = angular.copy($scope.supplier);
+      $scope.toUpdate = !$scope.toUpdate;
+    };
+
+  })
   .controller('PurchaseOrderCtrl', function ($scope, purchaseOrders, PurchaseOrder, Order) {
     
     $scope.purchaseOrder = {};
