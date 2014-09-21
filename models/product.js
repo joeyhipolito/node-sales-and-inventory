@@ -7,7 +7,7 @@ var productSchema = mongoose.Schema({
   packaging : String,
   dose      : Number,
   supplier  : {
-    id   : String
+    id   : String,
     name : String
   }
 });
