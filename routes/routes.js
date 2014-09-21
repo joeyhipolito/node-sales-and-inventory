@@ -28,6 +28,12 @@ module.exports = function (app, passport) {
   app.put('/supplier/:id', supplier.update);
   app.delete('/supplier/:id', supplier.delete);
 
+  // product
+  var product = require('../controllers/product');
+  app.get('/product', product.query);
+  app.get('/product/:id', product.get);
+  app.put('/product/:id', product.update);
+
 }
 
 function isAuthenticated (req, res, next) {
