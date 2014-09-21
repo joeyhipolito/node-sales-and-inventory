@@ -978,6 +978,26 @@ input.hidden {
   padding: 10px;
 }
 
+.max-height450 {
+  max-height: 450px;
+  overflow: auto;
+}
+
+
+.order__list {
+  margin: 10px 0;
+  padding: 0;
+}
+
+.order__item {
+  float: left;
+  margin: 10px;
+}
+
+.order__item .ion-close {
+  text-align: center;
+}
+
 /* ANIMATIONS
 ============================================================================= */
 /* slide out to the left */

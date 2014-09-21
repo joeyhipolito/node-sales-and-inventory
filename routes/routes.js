@@ -34,6 +34,10 @@ module.exports = function (app, passport) {
   app.get('/product/:id', product.get);
   app.put('/product/:id', product.update);
 
+
+  // access
+  var access = require('../controllers/access');
+  app.get('/access', access.query);
 }
 
 function isAuthenticated (req, res, next) {

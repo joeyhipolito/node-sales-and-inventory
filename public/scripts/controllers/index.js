@@ -55,6 +55,39 @@ angular.module('bensethApp')
     console.log(products);
 
   })
+  .controller('PurchaseOrderCreateCtrl', function ($scope, $stateParams, suppliers, Supplier, Product) {
+    $scope.orders = [];
+    $scope.order = {};
+
+    Supplier.get({id: $stateParams.supplier_id}).$promise.then(function (supplier) {
+      $scope.supplier = supplier;
+    });
+
+    Product.query().$promise.then(function (products) {
+      $scope.products = products;
+    });
+
+    $scope.suppliers = suppliers;
+
+
+    $scope.orderCreate = function() {
+      // $scope.order.purchase_order_id = $scope.purchaseOrder.id;
+      // orderService.save({}, $scope.order).$promise.then(function(order){
+        
+      // });
+      $scope.orders.push($scope.order);
+      $scope.order = {};
+    };
+
+    $scope.orderDelete = function(index) {
+      var order = $scope.orders[index];
+      orderService.delete({}, {id : order.id}).$promise.then(function(){
+        $scope.orders.splice(index,1);
+      });
+    };
+
+
+  })
   .controller('PurchaseOrderCtrl', function ($scope, purchaseOrders, PurchaseOrder, Order) {
     
     $scope.purchaseOrder = {};

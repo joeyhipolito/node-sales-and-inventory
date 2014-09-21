@@ -7,7 +7,9 @@ var supplierSchema = mongoose.Schema({
   contact_number : String,
   contact_person : String,
   email          : String,
-  products       : Array
+  products       : [
+    {id: String, name: String}
+  ]
 });
 
 module.exports = mongoose.model('Supplier', supplierSchema);

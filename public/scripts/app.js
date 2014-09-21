@@ -56,7 +56,13 @@ angular
       .state('purchase_order.create', {
         abstract: true,
         url: '/purchase_order/create?supplier_id',
-        templateUrl: 'views/purchase_order.create.html'
+        templateUrl: 'views/purchase_order.create.html',
+        resolve: {
+          suppliers: function (Supplier) {
+            return Supplier.query().$promise;
+          }
+        },
+        controller: 'PurchaseOrderCreateCtrl'
       })
       .state('purchase_order.create.suppliers_list', {
         url: '',
@@ -132,7 +138,7 @@ angular
         templateUrl: 'views/product.html',
         resolve: {
           products: function (Product) {
-            return Product.query();
+            return Product.query().$promise;
           }
         },
         controller: 'ProductCtrl'

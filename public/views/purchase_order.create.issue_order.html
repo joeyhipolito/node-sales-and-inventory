@@ -1,13 +1,38 @@
 <div class="row">
-  <div class="content__block--noborder col-1">
+  <div class="content__block--noborder col-2">
     <header class="content__block__title">
       <h5 class="bold grey--darker upper">What items would you like to order?</h5>
+    </header>
+    <div class="media media--center input__block input--outline grey">
+      <span class="ion-ios7-search media__fig input__icon small grey--darker"></span>
+      <input class="media__bd dark" type="text" ng-model="product_name" placeholder="Search product">
+    </div>
+    <div class="list row  max-height450">
+      <div class="list__item--horizontal card__wrapper pcol-1-1" ng-repeat="product in products | filter:product_name">
+        <div class="list__card  list__card--padded media media--center row">
+          <div class="media__bd">
+            <a href="" ng-click="order.product_name = product.name">
+              <p class="upper media media--center">
+                <span class="media__fig media__icon detail__icon ion-bag blue-grey"></span>
+                <span class="bold upper  blue-grey smallest">{{product.name}}</span>
+              </p>
+            </a>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="content__block--noborder col-2">
+    <header class="content__block__title">
+      <h5 class="bold grey--darker upper">Click items on the left or search here</h5>
     </header>
     
     <form ng-submit="orderCreate()" action="" novalidate>
       <div class="media media--center input__block input--outline grey">
         <span class="ion-ios7-cart-outline media__fig input__icon small grey--darker"></span>
-        <input class="media__bd dark grey--darker" type="text" ng-model="order.product_name" placeholder="Enter product name here">
+        <input class="media__bd dark grey--darker" type="text" ng-model="order.product_name" placeholder="Product name here" disabled>
       </div>
       <div class="media media--center input__block input--outline grey">
         <span class="ion-ios7-more-outline media__fig input__icon small grey--darker"></span>
@@ -21,10 +46,8 @@
       </a>
       <input class="hidden" type="submit"></input>
     </form>
-  </div>
-  
-  <div class="content__block--noborder col-2">
-    <div ng-show="orders.length > 0">
+    <!-- <div ng-show="orders.length > 0"> -->
+    <div>
       <header class="content__block__title">
         <h5 class="bold grey--darker upper">Items currently in purchase order</h5>
       </header>
