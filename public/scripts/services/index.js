@@ -91,6 +91,9 @@ angular.module('bensethApp')
   .factory('User', ['Resource', function ($resource) {
     return $resource('/user/:id',{id: '@id'},{});
   }])
+  .factory('Product', ['Resource', function ($resource) {
+    return $resource('/product/:id',{id: '@id'},{});
+  }])
   .factory('Supply', ['Resource', function ($resource) {
     return $resource('/supply/:id',{id: '@id'},{});
   }])

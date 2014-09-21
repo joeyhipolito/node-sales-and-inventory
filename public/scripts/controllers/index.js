@@ -49,6 +49,12 @@ angular.module('bensethApp')
     };
 
   })
+  .controller('ProductCtrl', function ($scope, products, Product) {
+
+    $scope.products = products;
+    console.log(products);
+
+  })
   .controller('PurchaseOrderCtrl', function ($scope, purchaseOrders, PurchaseOrder, Order) {
     
     $scope.purchaseOrder = {};

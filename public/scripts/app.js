@@ -129,7 +129,13 @@ angular
       })
       .state('product.control', {
         url: '/product',
-        templateUrl: 'views/product.html'
+        templateUrl: 'views/product.html',
+        resolve: {
+          products: function (Product) {
+            return Product.query();
+          }
+        },
+        controller: 'ProductCtrl'
       });
 
     $stateProvider

@@ -6,10 +6,9 @@ var productSchema = mongoose.Schema({
   size_unit : String,
   packaging : String,
   dose      : Number,
-  supplier  : {
-    id   : String,
-    name : String
-  }
+  suppliers : [
+    {id: String, name: String}
+  ] 
 });
 
 module.exports = mongoose.model('Product', productSchema);
