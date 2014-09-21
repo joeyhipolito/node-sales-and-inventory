@@ -1,25 +1,29 @@
-<header class="content__page-title pure-g">
-  <div class="media media--center page-title__block pure-u-4-5">
+<header class="content__page-title">
+  <div class="media media--center page-title__block left">
     <span class="media__fig white icon--text media__icon grey ion-ios7-world"></span>
     <h2 class="blue-grey small upper mold">Suppliers</h2>
+  </div>
+  <div class="media media--center input__block input--outline grey right">
+    <span class="ion-ios7-search media__fig input__icon small grey--darker"></span>
+    <input class="media__bd dark" type="text" ng-model="company_name" placeholder="Search for company">
   </div>
 </header>
 
 <div class="content__container row">
   <div class="content__block content__block--transparent col-4">
     <div class="list row">
-      <div class="list__item--horizontal card__wrapper pcol-1-2" ng-repeat="supplier in suppliers">
+      <div class="list__item--horizontal card__wrapper pcol-1-2" ng-repeat="supplier in suppliers | filter:company_name">
         <div class="list__card  list__card--padded media media--center row">
           <div class="media__bd">
             <a ng-href="#/supplier/{{supplier._id}}"><p class="upper media media--center">
                 <span class="media__fig media__icon detail__icon ion-ios7-world-outline blue-grey"></span>
                 <span class="bold upper  blue-grey smallest">{{supplier.name}}</span>
               </p>
-              <p class="upper media media--center">
+              <p class="upper media media--center" ng-show="supplier.address">
                 <span class="media__fig media__icon detail__icon ion-ios7-location-outline blue-grey"></span>
                 <span class="media__bd xxs blue-grey">{{supplier.address}}</span>
               </p>
-              <p class="upper media media--center">
+              <p class="upper media media--center" ng-show="supplier.contact_number">
                 <span class="media__fig media__icon detail__icon ion-ios7-telephone-outline blue-grey"></span>
                 <span class="media__bd xxs blue-grey">{{supplier.contact_number}}</span>
               </p></a>
