@@ -36,7 +36,7 @@
       </div>
       <div class="media media--center input__block input--outline grey">
         <span class="ion-ios7-more-outline media__fig input__icon small grey--darker"></span>
-        <input class="media__bd dark grey--darker" type="number" ng-model="order.amount" placeholder="Enter amount" my-focus="focusInput">
+        <input class="media__bd dark grey--darker" type="number" ng-model="order.quantity_ordered" placeholder="Enter amount" my-focus="focusInput">
       </div>
       <a ng-click="orderCreate()" class="media media--center button button--outline right">
         <figure class="media__fig button__icon small">
@@ -55,7 +55,7 @@
       <ul class="order__list">
         <li class="order__item tag white media media--center" ng-repeat="order in purchaseOrder.orders">
           <span class="media__fig ion-cube detail__icon grey"></span>
-          <span class="smallest upper">&nbsp;{{order.product_name}} ({{order.amount}})</span>
+          <span class="smallest upper">&nbsp;{{order.product_name}} ({{order.quantity_ordered}})</span>
           <a href="" ng-click="orderDelete($index)">
             <span class="hint--top" data-hint="Delete this product"><span class="media__fig ion-close detail__icon red"></span></span>
           </a>

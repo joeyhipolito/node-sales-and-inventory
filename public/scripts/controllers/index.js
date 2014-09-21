@@ -57,11 +57,15 @@ angular.module('bensethApp')
 
   })
   .controller('ProductCtrl', function ($scope, products, Product) {
-
     $scope.products = products;
-
   })
-  .controller('PurchaseOrderCreateCtrl', function ($scope, $stateParams, suppliers, Supplier, Product, PurchaseOrder) {
+  .controller('PurchaseOrderCtrl', function ($scope, PurchaseOrder) {
+    $scope.purchaseOrders = [];
+    PurchaseOrder.query().$promise.then(function (purchaseOrders) {
+      $scope.purchaseOrders = purchaseOrders;
+    }); 
+  })
+  .controller('PurchaseOrderCreateCtrl', function ($scope, $stateParams, suppliers, Supplier, Product, PurchaseOrder, Order) {
     $scope.order = {};
     $scope.purchaseOrder = {};
     $scope.purchaseOrders = [];
@@ -80,13 +84,24 @@ angular.module('bensethApp')
 
 
     $scope.orderCreate = function() {
-      $scope.purchaseOrder.orders.push($scope.order);
-      $scope.order = {};
+      var order = new Order();
+      order.purchase_order_id = $scope.purchaseOrder._id;
+      order.product_id = $scope.order.product_id;
+      order.product_name = $scope.order.product_name;
+      order.quantity_ordered = $scope.order.quantity_ordered;
+      order.$save().then(function (purchaseOrder) {
+        $scope.purchaseOrder = purchaseOrder;
+      });
+      
     };
 
     $scope.orderDelete = function(index) {
-      $scope.purchaseOrder.orders.splice(index, 1);
-
+      var order = $scope.purchaseOrder.orders[index];
+      console.log(order);
+      Order.delete({id: order.order_id}).$promise.then(function (res) {
+        $scope.purchaseOrder.orders.splice(index, 1);
+      });
+      
     };
 
     $scope.purchaseOrderIssue = function () {
@@ -102,10 +117,26 @@ angular.module('bensethApp')
     };
 
   })
-  .controller('PurchaseOrderCtrl', function ($scope, PurchaseOrder) {
-    $scope.purchaseOrders = [];
-    PurchaseOrder.query().$promise.then(function (purchaseOrders) {
-      $scope.purchaseOrders = purchaseOrders;
-    });
+  .controller('ReceiveOrderCtrl', function ($scope, purchaseOrders, Order) {
+    $scope.purchaseOrder = null;
+    $scope.purchaseOrders = purchaseOrders;
     
+    $scope.today = new Date().toISOString().split('T')[0];
+
+    $scope.receive = {};
+    
+
+    $scope.setSelectedPurchaseOrder = function (po) {
+      $scope.purchaseOrder = po;
+    };
+
+    $scope.receiveOrder = function(index) {
+
+      $scope.purchaseOrder.orders[index].quantity_received += $scope.receive.quantity_received;
+      $scope.purchaseOrder.orders[index].expiration_date = $scope.receive.expiration_date;
+      $scope.purchaseOrder.orders[index].unit_cost = $scope.unit_cost;
+      $scope.receive = {};
+
+      $scope.purchaseOrder.$save();
+    };
   });

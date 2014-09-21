@@ -20,6 +20,15 @@ module.exports = function (app, passport) {
   app.put('/purchase-order/:id', po.update);
   app.delete('/purchase-order/:id', po.delete);
 
+  // order 
+  var order = require('../controllers/order');
+  app.get('/order', order.query);
+  app.post('/order', order.create);
+  app.get('/order/:id', order.get);
+  app.put('/order/:id', order.update);
+  app.delete('/order/:id', order.delete);
+  
+
   // supplier
   var supplier = require('../controllers/supplier');
   app.get('/supplier', supplier.query);
@@ -33,7 +42,6 @@ module.exports = function (app, passport) {
   app.get('/product', product.query);
   app.get('/product/:id', product.get);
   app.put('/product/:id', product.update);
-
 
   // access
   var access = require('../controllers/access');

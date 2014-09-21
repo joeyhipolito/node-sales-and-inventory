@@ -18,15 +18,15 @@
         <h5 class="bold grey--darker upper">Search Results</h5>
       </header>
       <ul class="list">
-        <li class="list__card  list__card--padded" ng-repeat="po in searchResults" ng-class="{'purchase-order--selected' : $parent.purchaseOrder.id === po.id}">
-          <a href="" ng-click="setSelectedPurchaseOrder(po.id)">
+        <li class="list__card  list__card--padded" ng-repeat="po in purchaseOrders | filter:{status: '!complete'}" ng-class="{'purchase-order--selected' : $parent.purchaseOrder._id === po._id}">
+          <a href="" ng-click="setSelectedPurchaseOrder(po)">
             <p class="upper media media--center">
               <span class="media__fig media__icon detail__icon ion-ios7-barcode-outline blue-grey"></span>
-              <span class="bold upper  blue-grey smallest">{{po.tracking_id}}</span>
+              <span class="bold upper  blue-grey smallest">{{po._id}}</span>
             </p>
             <p class="upper media media--center">
               <span class="media__fig media__icon detail__icon ion-ios7-world-outline blue-grey"></span>
-              <span class="upper  blue-grey smallest">{{po.supplier}}</span>
+              <span class="upper  blue-grey smallest">{{po.supplier.name}}</span>
             </p>
           </a>
         </li>
@@ -38,21 +38,21 @@
           <h5 class="bold grey--darker upper">Selected Purchase Order</h5>
         </header>
         <div class="list__card list__card--padded media media--center card row">
-          <div class="col-1 card__item--horizontal">
+          <div class="col-2 card__item--horizontal">
             <p class="upper thin xxs">tracking id</p>
-            <p class="bold smallest">{{purchaseOrder.tracking_id}}</p>
+            <p class="bold smallest">{{purchaseOrder._id}}</p>
           </div>
           <div class="col-1 card__item--horizontal">
             <p class="upper thin xxs">date issued</p>
-            <p class="bold smallest">{{purchaseOrder.date_issued}}</p>
+            <p class="bold smallest">{{purchaseOrder.date_issued | date: 'medium'}}</p>
           </div>
           <div class="col-1 card__item--horizontal">
             <p class="upper thin xxs">last updated</p>
-            <p class="bold smallest">{{purchaseOrder.date_last_updated}}</p>
+            <p class="bold smallest">{{purchaseOrder.date_updated | date: 'medium'}}</p>
           </div>
           <div class="card__item--horizontal">
             <span class="tag upper smallest bold"
-            ng-class="{incomplete : 'red', pending : 'green', complete : 'blue', draft : 'grey'}[purchaseOrder.status]"
+            ng-class="{incomplete : 'red', issued : 'green', complete : 'blue', draft : 'grey'}[purchaseOrder.status]"
             >{{purchaseOrder.status}}</span>
           </div>
         </div>
@@ -61,7 +61,7 @@
         </header>
         <!-- start order items -->
         <div class="list row">
-          <div class="list__item--horizontal card__wrapper pcol-1-1" ng-repeat="order in orders">
+          <div class="list__item--horizontal card__wrapper pcol-1-1" ng-repeat="order in purchaseOrder.orders">
             <div class="list__card  list__card--padded media media--center row">
               <div ng-show="order.status === 'complete' || order.status === 'added'" class="card__overlay aligner--center aligner">
                 <span class="aligner__item small grey--dark bold upper">Order Item Complete!</span>
@@ -104,11 +104,11 @@
                   </header>
                   <div ng-hide="order.unit_cost" class="media media--center input__block input--outline grey">
                     <span class="ion-ios7-pricetags-outline media__fig input__icon small grey--darker"></span>
-                    <input class="media__bd dark grey--darker" type="number" ng-model="order.receive.unit_cost" placeholder="How much does each unit cost?">
+                    <input class="media__bd dark grey--darker" type="number" ng-model="receive.unit_cost" placeholder="How much does each unit cost?">
                   </div>
                   <div class="media media--center input__block input--outline grey">
                     <span class="ion-ios7-more-outline media__fig input__icon small grey--darker"></span>
-                    <input class="media__bd dark grey--darker" type="number" ng-model="order.receive.quantity_received" placeholder="Enter quantity to receive">
+                    <input class="media__bd dark grey--darker" type="number" ng-model="receive.quantity_received" placeholder="Enter quantity to receive">
                   </div>
                   <div ng-hide="order.expiration">
                     <header class="content__block__title">
@@ -116,7 +116,7 @@
                     </header>
                     <div class="media media--center input__block input--outline grey">
                       <span class="ion-ios7-calendar-outline media__fig input__icon small grey--darker"></span>
-                      <input class="media__bd dark grey--darker" type="date" ng-model="order.receive.expiration">
+                      <input class="media__bd dark grey--darker" type="date" ng-model="receive.expiration" min="{{today}}">
                     </div>
                   </div>
                   <a ng-click="receiveOrder($index)" class="media media--center button button--outline right">

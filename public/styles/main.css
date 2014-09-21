@@ -102,6 +102,10 @@ a, a:link, a:active, a:visited {
   color: #bdc3c7;
 }
 
+figure {
+  margin: 0;
+}
+
 .container {
   -webkit-flex: 1;
   flex: 1;
@@ -203,6 +207,7 @@ a, a:link, a:active, a:visited {
 .list {
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .list__item {

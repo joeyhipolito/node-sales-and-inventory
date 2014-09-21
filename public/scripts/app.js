@@ -129,7 +129,13 @@ angular
       })
       .state('order.receive', {
         url: '/order/receive',
-        templateUrl: 'views/order.receive.html'
+        templateUrl: 'views/order.receive.html',
+        resolve: {
+          purchaseOrders: function (PurchaseOrder) {
+            return PurchaseOrder.query().$promise;
+          }
+        },
+        controller: 'ReceiveOrderCtrl'
       });
 
     $stateProvider
