@@ -195,10 +195,10 @@ a, a:link, a:active, a:visited {
   animation: slideInRight 0.3s both ease; 
 }
 
-
-
-
-.list {}
+.list {
+  margin: 0;
+  padding: 0;
+}
 
 .list__item {
   padding: 10px;

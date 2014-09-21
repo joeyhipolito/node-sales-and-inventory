@@ -8,7 +8,10 @@ var purchaseOrderSchema = mongoose.Schema({
   date_drafted : { type: Date, default: Date.now },
   date_issued  : Date,
   date_updated : Date,
-  status       : { type: String, default: 'draft' } 
+  orders       : [
+    {product_id: String, product_name: String, amount: Number}
+  ],
+  status       : { type: String, default: 'draft' }
 });
 
 module.exports = mongoose.model('PurchaseOrder', purchaseOrderSchema);

@@ -42,16 +42,11 @@ angular
       .state('purchase_order', {
         abstract: true,
         templateUrl: 'views/templates/left-sidebar.html'
-        // resolve: {
-        //   purchaseOrders: function(PurchaseOrder) {
-        //     return PurchaseOrder.query();
-        //   }
-        // },
-        // controller: 'PurchaseOrderCtrl'
       })
       .state('purchase_order.view', {
         url: '/purchase_order',
-        templateUrl: 'views/purchase_order.html'
+        templateUrl: 'views/purchase_order.html',
+        controller: 'PurchaseOrderCtrl'
       })
       .state('purchase_order.create', {
         abstract: true,

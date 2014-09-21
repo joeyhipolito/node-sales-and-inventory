@@ -14,31 +14,31 @@
 <div class="content__container">
   <div class="content__block content__block--transparent">
     <ul class="list">
-      <li class="list__card list__card--padded media media--center row" ng-repeat="po in purchaseOrders">
+      <li class="list__card list__card--padded media media--center row" ng-repeat="po in purchaseOrders | orderBy: 'date_drafted':true">
         <span class="media__fig ion-paperclip media__icon log__icon grey small card__item--horizontal__icon"></span>
         <p class="upper smallest bold aligner col-2 card__item--horizontal">
           <span class="tag"
-          ng-class="{pending : 'green', draft : 'grey', complete : 'blue', incomplete : 'red'}[po.status]">
+          ng-class="{issued : 'green', draft : 'grey', complete : 'blue', incomplete : 'red'}[po.status]">
           {{po.status}}
           </span>
         </p>
         <div class="col-3 card__item--horizontal">
           <p class="upper thin xxs">Tracking ID</p>
-          <p class="bold smallest">{{po.tracking_id}}</p>
+          <p class="bold smallest">{{po._id}}</p>
         </div>
         <div class="col-3 card__item--horizontal">
           <p class="upper thin xxs">Supplier</p>
-          <p class="upper smallest bold truncate">{{po.supplier}}</p>
+          <p class="upper smallest bold truncate">{{po.supplier.name}}</p>
         </div>
         <div class="col-3 card__item--horizontal">
           <p class="upper thin xxs">Date Issued</p>
-          <p class="upper smallest bold"> {{po.date_issued}} </p>
+          <p class="upper smallest bold"> {{po.date_issued | date:'medium'}} </p>
         </div>
         <div class="col-3 card__item--horizontal">
           <p class="upper thin xxs">Last Updated</p>
-          <p class="upper smallest bold">{{po.date_last_updated}}</p>
+          <p class="upper smallest bold">{{po.date_updated | date:'medium'}}</p>
         </div>
-        <a ng-href="#/purchase_order/{{po.id}}" class="media media--center icon__group--links smallest">
+        <a ng-href="#/purchase_order/{{po._id}}" class="media media--center icon__group--links smallest">
           <span class="ion-ios7-gear media__icon button__icon small"></span>
           <span class="upper bold">View</span>
         </a>
