@@ -15,6 +15,13 @@ angular.module('bensethApp')
     };
     
   })
+  .controller('DashboardCtrl', function ($scope, accessLogs, poLogs) {
+
+    $scope.log = {};
+    $scope.log.user = accessLogs;
+    $scope.log.purchase = poLogs;
+
+  })
   .controller('SupplierCtrl', function ($scope, suppliers, Supplier) {
 
     $scope.suppliers = suppliers;

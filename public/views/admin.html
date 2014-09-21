@@ -14,12 +14,12 @@
   <div class="content__block col-1">
     <h5 class="content__block__title bold grey--darker upper">System Access Logs</h5>
     <ul class="list">
-      <li ng-repeat="user in log.user" class="list__item list__item--bordered media media--center ng-scope">
+      <li ng-repeat="log in log.user" class="list__item list__item--bordered media media--center ng-scope">
         <span class="media__fig ion-ios7-person media__icon user__img white"></span>
         <div class="media__bd user__block upper smallest">
-          <p class="bold">{{user.firstname}} {{user.lastname}}</p>
-          <p class="grey--dark">{{user.role}}</p>
-          <p class="grey--dark">{{user.time_in | dateToISO | date : 'MMM d, y h:mm a'}}</p>
+          <p class="bold">{{log.user.firstname}} {{log.user.lastname}}</p>
+          <p class="grey--dark">{{log.user.role}}</p>
+          <p class="grey--dark">{{log.time_in | date : 'MMM d, y h:mm a'}}</p>
         </div>
       </li>    
     </ul>
@@ -39,11 +39,11 @@
       </thead>
       <tbody>
         <tr ng-repeat="log in log.purchase">
-          <td><span class="ion-ios7-pricetags small grey--light" ng-class="{draft : 'grey', pending : 'green', complete : 'blue', incomplete : 'red'}[log.status]"></span></td>
+          <td><span class="ion-ios7-pricetags small grey--light" ng-class="{draft : 'grey', issued : 'green', complete : 'blue', incomplete : 'red'}[log.status]"></span></td>
           <td>{{log.status}}</td>
-          <td>{{log.tracking_id}}</td>
-          <td>{{log.supplier}}</td>
-          <td>{{log.date_last_updated || 'not yet updated'}}</td>
+          <td>{{log._id}}</td>
+          <td>{{log.supplier.name}}</td>
+          <td>{{log.date_updated || 'not yet updated' | date:'medium'}}</td>
         </tr>
       </tbody>
     </table>

@@ -30,13 +30,18 @@ module.exports = function (passport) {
         if (!user || !user.validPassword(password)) {
           return done(null, false);
         }
+        
         var access = new Access();
-        var session_id = access.clockIn(user._id);
-        user.session_id = session_id;
+        access.user.id = user._id;
+        access.user.firstname = user.firstname;
+        access.user.lastname = user.lastname;
+        access.user.role = user.role;
+        access.save();
+        user.session_id = access._id;
         user.save();
         return done(null, user);
 
-      })
+      });
     }
   ));
 

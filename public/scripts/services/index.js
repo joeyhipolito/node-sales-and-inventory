@@ -83,6 +83,6 @@ angular.module('bensethApp')
     return $resource('/order/:id',{id: '@id'},{});
   }])
   .factory('Log', ['Resource', function ($resource) {
-    return $resource('/log/:id',{id: '@id'},{});
+    return $resource('/access/:id',{id: '@id'},{});
   }]);
 
