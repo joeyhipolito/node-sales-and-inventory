@@ -195,10 +195,10 @@ a, a:link, a:active, a:visited {
   animation: slideInRight 0.3s both ease; 
 }
 
-
-
-
-.list {}
+.list {
+  margin: 0;
+  padding: 0;
+}
 
 .list__item {
   padding: 10px;
@@ -976,6 +976,26 @@ input.hidden {
 
 .b-table tr.padded {
   padding: 10px;
+}
+
+.max-height450 {
+  max-height: 450px;
+  overflow: auto;
+}
+
+
+.order__list {
+  margin: 10px 0;
+  padding: 0;
+}
+
+.order__item {
+  float: left;
+  margin: 10px;
+}
+
+.order__item .ion-close {
+  text-align: center;
 }
 
 /* ANIMATIONS

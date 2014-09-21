@@ -40,7 +40,7 @@ exports.update = function (req, res) {
   var id = req.param('id');
   var post = req.body;
   Supplier.findByIdAndUpdate(id, {
-    name : post.name,
+    name    : post.name,
     address : post.address,
     tin     : post.tin,
     email   : post.email,

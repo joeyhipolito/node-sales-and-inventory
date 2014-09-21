@@ -52,54 +52,53 @@ angular.module('bensethApp')
   .controller('ProductCtrl', function ($scope, products, Product) {
 
     $scope.products = products;
-    console.log(products);
 
   })
-  .controller('PurchaseOrderCtrl', function ($scope, purchaseOrders, PurchaseOrder, Order) {
-    
-    $scope.purchaseOrder = {};
-    $scope.purchaseOrders = purchaseOrders;
-
-    // purchaseOrder items
+  .controller('PurchaseOrderCreateCtrl', function ($scope, $stateParams, suppliers, Supplier, Product, PurchaseOrder) {
     $scope.order = {};
-    $scope.orders = [];
-
-    // purchaseOrder supplier
+    $scope.purchaseOrder = {};
+    $scope.purchaseOrders = [];
     $scope.supplier = {};
+    $scope.suppliers = suppliers;
+
+    if ($stateParams.supplier_id) {
+      Supplier.get({id: $stateParams.supplier_id}).$promise.then(function (supplier) {
+        $scope.supplier = supplier;
+      });
+    };
+
+    Product.query().$promise.then(function (products) {
+      $scope.products = products;
+    });
+
+
+    $scope.orderCreate = function() {
+      $scope.purchaseOrder.orders.push($scope.order);
+      $scope.order = {};
+    };
+
+    $scope.orderDelete = function(index) {
+      $scope.purchaseOrder.orders.splice(index, 1);
+
+    };
+
+    $scope.purchaseOrderIssue = function () {
+      $scope.purchaseOrder.$save().then(function () {
+        $scope.purchaseOrder = {};
+      });
+    };
 
     $scope.purchaseOrderCreate = function () {
-      PurchaseOrder.save({}, $scope.purchaseOrder).$promise.then(function (purchaseOrder) {
-        $scope.purchaseOrders.push(purchaseOrder);
-      });
+      $scope.purchaseOrder = new PurchaseOrder();
+      $scope.purchaseOrder.supplier = $scope.supplier._id;
+      $scope.purchaseOrder.$save();
     };
 
-    $scope.purchaseOrderIssue = function (id) {
-      PurchaseOrder.get({id: id}).$promise.then(function (purchaseOrder){
-        purchaseOrder.$issue();
-      });
-    };
-
-    $scope.purchaseOrderDelete = function (index) {
-      var po = $scope.purchaseOrders[index];
-      po.$delete().$promise.then(function () {
-        $scope.purchaseOrders.splice(index, 1);
-      });
-    };
-
-    $scope.orderItemAdd = function () {
-      $scope.order.poId = $scope.purchaseOrder.id;
-      Order.save({}, $scope.order).$promise.then(function (order) {
-        $scope.orders.push(order);
-        $scope.order = {};
-      })
-    };
-
-    $scope.orderItemRemove = function (index) {
-      var order = $scope.orders[index];
-      Order.delete({id: order.id}).$promise.then(function () {
-        $scope.orders.splice(index, 1);
-      });
-    };
-
-
+  })
+  .controller('PurchaseOrderCtrl', function ($scope, PurchaseOrder) {
+    $scope.purchaseOrders = [];
+    PurchaseOrder.query().$promise.then(function (purchaseOrders) {
+      $scope.purchaseOrders = purchaseOrders;
+    });
+    
   });

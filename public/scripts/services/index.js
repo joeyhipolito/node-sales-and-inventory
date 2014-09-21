@@ -65,28 +65,7 @@ angular.module('bensethApp')
     }
   })
   .factory('PurchaseOrder', ['Resource', function ($resource) {
-    return $resource(API + 'purchase_order/:listController:id/:itemController',
-        {
-          id: '@id',
-          listController: '@listController',
-          itemController: '@itemController'
-        },
-        {
-          issue: {
-            params: {
-              itemController: 'issue'
-            },
-            method: 'PUT'
-          },
-          orders: {
-            params: {
-              itemController: 'orders'
-            },
-            method: 'GET',
-            isArray: true
-          }
-        }
-      );
+    return $resource('/purchase-order/:id',{id: '@id'},{});
   }])
   .factory('User', ['Resource', function ($resource) {
     return $resource('/user/:id',{id: '@id'},{});

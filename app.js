@@ -10,6 +10,7 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 
 var app = express();
+var _   = require('underscore');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
